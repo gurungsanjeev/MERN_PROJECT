@@ -5,6 +5,6 @@ const UserDataSchema = new mongoose.Schema({
     email:String,
     password:String
 })
-const UserModel = mongoose.model("userDetails", UserDataSchema)
+const UserDataModel = mongoose.model("userDetails", UserDataSchema) /// new userDetails named table has been created 
 
-module.exports = UserModel
+module.exports = UserDataModel

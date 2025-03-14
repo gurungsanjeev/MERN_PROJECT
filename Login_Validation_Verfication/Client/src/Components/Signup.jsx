@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useState } from 'react';
 
@@ -10,14 +10,17 @@ const Signup = () => {
     const [name, setName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-  
+  const navigate  = useNavigate()
 
 
 
     const handleSubmit = (e)=>{
         e.preventDefault();
         axios.post('http://localhost:3001/signup', {name,email,password})
-        .then(result=> console.log(result))
+        .then(alert("Registerd Successfully!!"))
+        .then(result=> {console.log(result)
+          navigate('/login')
+        })
         .catch(err=> console.log(err))
     }
 
