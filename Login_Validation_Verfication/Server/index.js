@@ -1,13 +1,18 @@
+
+//// Importing required package
+
 const express = require("express")
 const mongoose = require('mongoose')
 const cors = require('cors')
 const UserDataModel = require('./models/UserData')
 
-
+//// Creating an express app
 const app = express()
 app.use(express.json())
 app.use(cors())
 
+
+///Connection to the mongo db
 // mongoose.connect("mongodb://localhost:127.0.0.1:27017/userDetails")
 
 mongoose.connect("mongodb://127.0.0.1:27017/userDetails", {
@@ -33,6 +38,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/userDetails", {
 //     })
 // })
 
+
+
+/// sign up routes for user registration
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   UserDataModel.findOne({ email: email })
@@ -58,21 +66,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-// app.post('/signup', async(req, res) => {
-//   UserDataModel.create(req.body)
-//     .then(userDetails => res.json(userDetails))
-//     .catch(err => res.json(err))
-// })
 
 
 const bcrypt = require("bcryptjs");
@@ -101,6 +94,8 @@ app.post('/signup', async (req, res) => {
 app.listen(3001, () => {
   console.log("server is running")
 })
+
+
 
 
 
