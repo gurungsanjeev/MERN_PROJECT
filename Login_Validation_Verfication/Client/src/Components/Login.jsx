@@ -1,30 +1,30 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-  
   const navigate = useNavigate();
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/login", {email, password})
-    // .then(alert(`Welcome ${name}` ))
-    .then(result => {
-      console.log(result)
-      if(result.data === "Success"){
-        navigate('/home')
-      }
-      else{
-        alert("password didn't match")
-      }
-    })
-    .catch(err => console.log(err))
+    axios
+      .post("http://localhost:3001/login", { email, password })
+      // .then(alert(`Welcome ${name}` ))
+      .then((result) => {
+        console.log(result);
+        if (result.data === "Success") {
+          navigate("/home");
+        } else {
+          alert("password didn't match");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -38,7 +38,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                onChange={(e)=>{
+                onChange={(e) => {
                   setEmail(e.target.value);
                 }}
                 value={email}
@@ -55,7 +55,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e)=>{
+                onChange={(e) => {
                   setPassword(e.target.value);
                 }}
                 placeholder="password"
@@ -74,16 +74,33 @@ const Login = () => {
             <label htmlFor="text">Don't have an account!</label>
           </form>
           <NavLink to="/signup">
-           
             <button
               type="submit"
-              
               className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
             >
               Register
             </button>
           </NavLink>
+          <div className="social-login justify-center content-center align-bottom">
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                const user = jwtDecode(credentialResponse.credential);
+                console.log("google user: " , user);
+
+                  // Store user info (optional)
+              localStorage.setItem("user", JSON.stringify(user));
+
+              // Redirect to homepage after login
+              navigate("/home");
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              
+            />
+          </div>
         </div>
+        ;
       </div>
     </>
   );
