@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './index.css'
 import './App.css'
+import { getLocalStorageData, setLocalStorageData } from './TodoLocalStorage';
+
+
+
+
+getLocalStorageData();
 
 function App() {
   const [task, setTask] = useState("")
-  const [list, setList] = useState([])
+  const [list, setList] = useState(()=> getLocalStorageData())
   const [editIndex, setEditIndex] = useState(null); // Track the task being edited
   const [editText, setEditText] = useState(""); // Store the edited task text
 
@@ -17,6 +23,10 @@ function App() {
   }
   else(alert("Your data is empty"))
  }
+/// todo local storage
+setLocalStorageData(list);
+
+
 
  const handleDelete=(index)=>{
   const newList = list.filter((_, i) => i !== index); // Remove task at specific index
