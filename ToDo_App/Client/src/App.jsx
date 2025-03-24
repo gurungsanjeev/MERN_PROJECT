@@ -1,33 +1,78 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import './index.css'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [task, setTask] = useState("")
+  const [list, setList] = useState([])
+  const [editIndex, setEditIndex] = useState(null); // Track the task being edited
+  const [editText, setEditText] = useState(""); // Store the edited task text
 
+
+
+ const handleAdd =()=>{
+  if (task.trim() !== "") { // Check if input is not empty
+    setList([...list, task]); // Add the new task to the list
+    setTask(""); // Clear the input field
+  }
+  else(alert("Your data is empty"))
+ }
+
+ const handleDelete=(index)=>{
+  const newList = list.filter((_, i) => i !== index); // Remove task at specific index
+  setList(newList); // Update the list state
+ }
+
+ 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="main-container bg-amber-200 min-h-screen w-full">
+        
+          <div className="heading">
+            <h1 className="text-blue-500 text-center text-4xl font-bold mt-3">ToDo List</h1>
+          </div>
+      
+          <div className="details flex justify-center text-center mt-4 w-full">
+            <div className="inputfield" >
+              <input
+               type="text" 
+               required 
+               value={task}
+               onChange={(e)=> setTask(e.target.value)}
+               className="border border-gray-400 px-2 py-1 w-xl" /> 
+               
+              <button className="ml-2 bg-blue-500 text-white px-4 py-2" onClick={handleAdd}>Add</button>
+            </div>
+          </div>
+          <ol className="task-list bg-gray-400 m-6 h-max" id="tasklist">
+              {list.map((task, index)=>{
+              return(
+                <li key={index} className='p-2 mt-2 bg-white flex justify-between items-center'>{task}
+                <span>
+                <button
+                className="bg-blue-400 text-white px-2 py-1 ml-2"
+                onClick={() => handleEdit(index)} // Pass index to delete specific task
+                >
+                Edit
+              </button>
+
+                 <button
+                className="bg-red-500 text-white px-2 py-1 ml-2"
+                onClick={() => handleDelete(index)} // Pass index to delete specific task
+                >
+                Delete
+              </button>
+              {/* <input type="date" /> */}
+                </span>
+                 </li>
+
+                 
+           
+              )
+                })}
+            </ol>
+        
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
