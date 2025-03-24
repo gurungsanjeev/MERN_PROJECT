@@ -15,9 +15,6 @@ export const getLocalStorageData=()=>{
   }
 
   export const setLocalStorageData=(list)=>{
-   
-  
-  
        return localStorage.setItem(todoKey, JSON.stringify(list))
       
   }
