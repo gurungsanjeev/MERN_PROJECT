@@ -15,6 +15,7 @@ import Home from './Home';
 getLocalStorageData();
 
 function App() {
+ 
   const [task, setTask] = useState("")
   const [list, setList] = useState(() => getLocalStorageData())
   const [editIndex, setEditIndex] = useState(null); // Track the task being edited
@@ -58,12 +59,12 @@ function App() {
 
 
 
-  //  const handleDelete=(index)=>{
-  //   const newList = list.filter((_, i) => i !== index); // Remove task at specific index
-  //   setList(newList); // Update the list state
 
-  //   setTotal(total-1);
-  //  }
+
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditText(list[index].task);  // Assuming you want to edit the task text
+  };
 
   const handleStatus = (index) => {
     const newList = list.map((item, i) =>
@@ -179,6 +180,7 @@ function App() {
 
       </div>
       <Home/>
+      
      
     </>
   )
