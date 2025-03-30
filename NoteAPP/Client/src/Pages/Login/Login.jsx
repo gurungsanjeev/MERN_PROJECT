@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import {jwtDecode} from "jwt-decode"
 
 const Login = () => {
 
@@ -12,17 +14,23 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
+    //google logout
+    const googleLogout=()=>{
+        googleLogout();
+    }
 
-    const handleSubmit=(e)=>{
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3001/login', {email, password})
-        .then(result=> {console.log(result)
-            if(result.data.message === "Success"){
+        axios.post('http://localhost:3001/login', { email, password })
+            .then(result => {
+                console.log(result)
+                if (result.data.message === "Success") {
 
-                navigate('/home')
-            }
-        })
-        .catch(err=>console.log(err));
+                    navigate('/home')
+                }
+            })
+            .catch(err => console.log(err));
     }
     return (
         <>
@@ -36,7 +44,7 @@ const Login = () => {
                         <input
                             type="email"
                             id="email"
-                            onChange={(e)=>setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="p-2 mb-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required
                         />
@@ -45,14 +53,14 @@ const Login = () => {
                         <input
                             type="password"
                             id="password"
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             autoComplete='current-password'
                             className="p-2 mb-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             required
                         />
 
-                        <button 
-                        className="bg-blue-500
+                        <button
+                            className="bg-blue-500
                          text-white
                           font-semibold 
                           py-2 px-4 
@@ -67,10 +75,21 @@ const Login = () => {
                             </Link>
 
                         </div>
+                        <div className="login-google">
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    console.log(jwtDecode(credentialResponse.credential));
+                                    navigate('/home');
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
-                </form>
-          
+            </form>
+
 
 
         </>
