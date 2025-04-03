@@ -55,12 +55,14 @@ const SignUp = () => {
                         />
 
                         <button className="bg-blue-500
+                        
                      text-white
                       font-semibold
                        py-2 px-4 
                        rounded-lg
                         hover:bg-blue-600 
-                        transition-all">
+                        transition-all" 
+                        type="submit">
                             SignUp
                         </button>
                         <div className='flex m-2 gap-2'>

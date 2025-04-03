@@ -6,18 +6,16 @@ import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import {jwtDecode} from "jwt-decode"
+import { jwtDecode } from "jwt-decode"
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isAuthenticated, setisAuthenticated] = useState(false)
     const navigate = useNavigate()
 
-    //google logout
-    const googleLogout=()=>{
-        googleLogout();
-    }
+
 
 
     const handleSubmit = (e) => {
@@ -26,7 +24,7 @@ const Login = () => {
             .then(result => {
                 console.log(result)
                 if (result.data.message === "Success") {
-
+                    setisAuthenticated(true);
                     navigate('/home')
                 }
             })
@@ -69,12 +67,15 @@ const Login = () => {
                             Login
                         </button>
                         <div className='flex m-2 gap-2'>
-                            <h5 className='text-sm'>Don't have account?</h5>
+                            <h5 className='text-sm'>Not registered yet?</h5>
                             <Link to="/signup">
-                                <h5 className='text-sm text-blue-500'>Signup Now!</h5>
+                                <h5 className='text-sm text-blue-500'>Create an account</h5>
                             </Link>
 
                         </div>
+
+
+
                         <div className="login-google">
                             <GoogleLogin
                                 onSuccess={credentialResponse => {
@@ -86,6 +87,7 @@ const Login = () => {
                                 }}
                             />
                         </div>
+
                     </div>
                 </div>
             </form>
