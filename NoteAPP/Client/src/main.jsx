@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-   // element: isAuthenticated ? <Home /> : <Navigate to="/login" replace />, // ✅ Protect route
+   element: isAuthenticated ? <Home /> : <Navigate to="/login" replace />, // ✅ Protect route
     element:  <Home />, // ✅ Protect route
   },
   {

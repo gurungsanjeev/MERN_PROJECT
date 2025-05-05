@@ -5,9 +5,9 @@ const NoteCard = ({
     title,
     date,
     content,
-    ispinned,
-    onEdit,
-    onDelete,
+    // ispinned,
+    // onEdit,
+    // onDelete,
     onPinNote
 }) => {
 

@@ -21,15 +21,15 @@ const Home = () => {
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
-      <NoteCard
+      {/* <NoteCard
         title="my meeting"
         date="12.12.2023"
         content="helleo"
-        ispinned={true}
+        // ispinned={true}
         onEdit={() => { }}
         onDelete={() => { }}
         onPinNote={() => { }}
-      />
+      /> */}
 
 
 
