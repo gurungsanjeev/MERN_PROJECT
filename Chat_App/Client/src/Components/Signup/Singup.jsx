@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    
   });
+  const [file, setFile] = useState(null)
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
@@ -20,13 +23,26 @@ const Signup = () => {
     }
     console.log('User registered:', formData);
     // Handle your backend signup API here
+  const formDetails = new FormDetails()
+  formData.append("username", username);
+  formData.append("password", password);
+  formData.append("image", file);
+  try{
+    axios.post('http://localhost:5000/chat/user/register', formDetails)
+    
+  }catch(err){
+console.log(err)
+  }
+  
   };
 
   return (
+    
     <div className="min-h-screen bg-[url('/images/land-image.jpg')] bg-no-repeat bg-cover bg-center  flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-500">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create an Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <label htmlFor="Full Name">Full Name</label>
           <input
             type="text"
             name="name"
@@ -36,6 +52,7 @@ const Signup = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label htmlFor="Email">Email:</label>
           <input
             type="email"
             name="email"
@@ -45,6 +62,7 @@ const Signup = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label htmlFor="Password">Password:</label>
           <input
             type="password"
             name="password"
@@ -54,6 +72,7 @@ const Signup = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label htmlFor="Confirm Password">Confirm Password:</label>
           <input
             type="password"
             name="confirmPassword"
@@ -63,6 +82,10 @@ const Signup = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label htmlFor="Upload images">Upload image</label>
+          <input type="file" name="" id="" 
+          onChange={()=> setFile(e.target.file[0])}
+          className='w-full py-2 border px-4 rounded-md border-gray-300 focus:ring-2 focus:ring-blue-500'/>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"

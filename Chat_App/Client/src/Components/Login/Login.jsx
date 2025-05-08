@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
-  
+  const notify =()=>{
+    toast("Login successfully!");
+    console.log("button clicked")
+  }
 
   return (
+    <>
+    <button onClick={notify}>Notify me</button>
+    <ToastContainer/>
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
 
@@ -18,12 +26,12 @@ const Login = () => {
               name="email"
               required
               className="peer w-full px-4 pt-6 pb-2 border border-gray-300 rounded-lg outline-none focus:border-indigo-500"
-             
-            />
+              
+              />
             <label
               htmlFor="email"
               className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-indigo-500"
-            >
+              >
               Email Address
             </label>
           </div>
@@ -37,18 +45,18 @@ const Login = () => {
               required
               className="peer w-full px-4 pt-6 pb-2 border border-gray-300 rounded-lg outline-none focus:border-indigo-500"
               
-            />
+              />
             <label
               htmlFor="password"
               className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-indigo-500"
-            >
+              >
               Password
             </label>
             <button
               type="button"
-            
+              
               className="absolute right-4 top-3 text-sm text-indigo-500 hover:underline focus:outline-none"
-            >
+              >
               
             </button>
           </div>
@@ -56,8 +64,9 @@ const Login = () => {
           {/* Submit Button */}
           <button
             type="submit"
+            onClick={notify}
             className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition"
-          >
+            >
             Login
           </button>
 
@@ -68,6 +77,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+            </>
   );
 };
 
