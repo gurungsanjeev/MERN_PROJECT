@@ -3,11 +3,11 @@ import axios from 'axios'
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
-    
+
   });
   const [file, setFile] = useState(null)
 
@@ -22,22 +22,32 @@ const Signup = () => {
       return;
     }
     console.log('User registered:', formData);
-    // Handle your backend signup API here
-  const formDetails = new FormDetails()
-  formData.append("username", username);
-  formData.append("password", password);
-  formData.append("image", file);
-  try{
-    axios.post('http://localhost:5000/chat/user/register', formDetails)
-    
-  }catch(err){
-console.log(err)
-  }
+
+
+    /// creating the formDetails obj
+    const formDetails = new FormData()
+    formDetails.append("username", formData.username);
+    formDetails.append("email", formData.email);
+    formDetails.append("password", formData.password);
+    if (file) {
+      formDetails.append("image", file);
+    }
   
+    
+    try {
+     const response = await axios.post('http://localhost:5000/chat/user/register', formDetails)
+     console.log("response", response)
+     if(response.data.msg==="success"){
+        openLogin()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+
   };
 
   return (
-    
+
     <div className="min-h-screen bg-[url('/images/land-image.jpg')] bg-no-repeat bg-cover bg-center  flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-500">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create an Account</h2>
@@ -45,9 +55,9 @@ console.log(err)
           <label htmlFor="Full Name">Full Name</label>
           <input
             type="text"
-            name="name"
+            name="username"
             placeholder="Full Name"
-            value={formData.name}
+            value={formData.username}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
@@ -83,9 +93,9 @@ console.log(err)
             required
           />
           <label htmlFor="Upload images">Upload image</label>
-          <input type="file" name="" id="" 
-          onChange={()=> setFile(e.target.file[0])}
-          className='w-full py-2 border px-4 rounded-md border-gray-300 focus:ring-2 focus:ring-blue-500'/>
+          <input type="file" name="images" id=""
+            onChange={(e) => setFile(e.target.files[0])}
+            className='w-full py-2 border px-4 rounded-md border-gray-300 focus:ring-2 focus:ring-blue-500' />
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"

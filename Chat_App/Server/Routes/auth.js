@@ -1,8 +1,8 @@
 import express from 'express'
-import Register from '../Controllers/Register.controller'
+import Register, { upload } from '../Controllers/Register.controller.js'
 
 const router = express.Router()
 
-router.post('/register', Register )
+router.post('/register', upload.single('image'), Register )
 
 export default router;
