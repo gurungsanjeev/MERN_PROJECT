@@ -9,7 +9,7 @@ import userRoute from './Routes/user.route.js'
 /// middlewares
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(cors()); /// enable for all request
 app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
