@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Signup from './Signup/Singup'
+// import Signup from './Signup/Singup'
+import Signup from './Signup/Signup'
 import Login from './Login/Login'
 import Model from './Model'
+import { useAuth } from '../Context/AuthProvider'
 
 const LandingPage = () => {
-
+const {authUser, setAuthUser} = useAuth()
+console.log(authUser);
 
     const [isModelOpen , setIsModelOpen] = useState(false)
     const [isLogin, setIsLogin] = useState(true)

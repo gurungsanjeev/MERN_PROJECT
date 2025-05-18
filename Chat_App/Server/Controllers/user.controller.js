@@ -35,7 +35,8 @@ export const signup = async (req, res) => {
                     message: "success", user: {
                         _id: newUser._id,
                         name: newUser.name,
-                        email: newUser.email
+                        email: newUser.email,
+
                     },
                 })
         }
@@ -54,8 +55,21 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
+        // checking if email and password are provided or not
+        if(!email || !password){
+            return res.status(400).json({message: "Email and password are required"})
+        }
+
+
+
+
         /// user is from data base
         const user = await UserModel.findOne({ email })
+
+         // If user not found, return early
+        if (!user) {
+            return res.status(404).json({ message: "Invalid user or password" });
+        }
         const isMatch = await bcrypt.compare(password, user.password);
         // if(user){
         //     isMatch !== password

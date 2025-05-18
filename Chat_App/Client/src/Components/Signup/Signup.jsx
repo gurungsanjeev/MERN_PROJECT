@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthProvider.jsx';
 
 const Signup = () => {
-
-    const notify = () => {
-        toast("Register successfully!");
-        console.log("button clicked")
-    }
-
+const {authUser, setAuthUser} = useAuth();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const password = watch("password", "");
     const confirmPassword = watch("confirmPassword", "");
+
+    // Log updated authUser when it changes
+    // useEffect(() => {
+    //     console.log("Updated authUser:", authUser);
+    // }, [authUser]);
 
     // Validate password and confirm password match
     const validatePassword = (value) => {
@@ -23,43 +23,56 @@ const Signup = () => {
     };
 
     // Handle form submission
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const userInfo = {
-            name: data.name, // Match name from form input field
+            name: data.name,
             email: data.email,
             password: data.password,
             confirmPassword: data.confirmPassword,
         };
-        console.log(userInfo);
 
-        // Make an API request
-        axios.post("http://localhost:5003/user/signup", userInfo)
-            .then((response) => {
-                console.log(response.data);
-                if (response.data) {
-                    alert("Signup successfully! You can now login")
-                    notify();
-                    setTimeout(() => {
-                        navigate('/login'); // navigate after short delay
-                    }, 2000);
+       await axios.post('http://localhost:5003/user/signup', userInfo)
+        .then((response)=>{
+            console.log(response.data)
+            if(response.data){
+                toast.success("Register Successfully")
+                localStorage.setItem('TOKEN', JSON.stringify(response.data))
+              
+              setAuthUser(response.data)
+                setTimeout(() => {
+                   navigate('/login')
+               }, 2000); 
+            }
+        })
+        .catch((err)=>{
+            if(err.response){
+                alert("error"+ err.response.error)
+            }
+            console.log("Error in Axios:",err);
+        })
 
+        // console.log(userInfo)
 
-                }
-                localStorage.setItem("messanger", JSON.stringify(response.data))
-            })
-            .catch((err) => {
+        // try {
+        //     const response = await axios.post("http://localhost:5003/user/signup", userInfo);
 
-                if (err.response) {
-                    if (err.response.status === 409) {
-                        alert("email Already exist, please login in")
-                        navigate('/login')
-                    }
-                    else if (err.response.status === 400) {
-                        alert("Passwords do not match.");
-                    }
-                    console.log("Error in axios", err);
-                }
-            });
+        //     if (response.data) {
+        //         toast.success("Signup successful! Redirecting to login...");
+        //         localStorage.setItem("messanger", JSON.stringify(response.data));
+        //         setAuthUser(response.data);
+        //         setTimeout(() => navigate('/login'), 2000);
+        //     }
+        // } catch (err) {
+        //     if (err.response) {
+        //         if (err.response.status === 409) {
+        //             toast.error("Email already exists, please login.");
+        //             navigate('/login');
+        //         } else if (err.response.status === 400) {
+        //             toast.error("Passwords do not match.");
+        //         }
+        //     }
+        //     console.error("Error in axios", err);
+        // }
     };
 
     return (
@@ -73,57 +86,51 @@ const Signup = () => {
                         <label htmlFor="Full Name">Full Name
                             <input
                                 type="text"
-                                name="name" // Match the name with 'register'
-                                placeholder="Full Name"
                                 {...register("name", { required: "Full Name is required" })}
+                                placeholder="Enter your full name"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
+                        {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
                         </label>
-                        {errors.name && <span className="text-red-500">{errors.name.message}</span>}
-                        <br />
-
-                        <label htmlFor="Email">Email:
+<br />
+                        <label htmlFor="Email" className='mt-4' >Email:
                             <input
                                 type="email"
-                                name="email"
-                                placeholder="Email Address"
                                 {...register("email", { required: "Email is required" })}
+                                placeholder="example@.com"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
+                        {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
                         </label>
-                        {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                         <br />
 
-                        <label htmlFor="Password">Password:
+                        <label htmlFor="Password" className='mt-4'>Password:
                             <input
                                 type="password"
-                                name="password"
-                                placeholder="Password"
                                 {...register("password", { required: "Password is required" })}
+                                placeholder="********"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
+                        {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                         </label>
-                        {errors.password && <span className="text-red-500">{errors.password.message}</span>}
                         <br />
 
-                        <label htmlFor="Confirm Password">Confirm Password:
+                        <label htmlFor="Confirm Password" className='mt-4'>Confirm Password:
                             <input
                                 type="password"
-                                name="confirmPassword"
-                                placeholder="Confirm Password"
                                 {...register("confirmPassword", {
                                     required: "Confirm Password is required",
                                     validate: validatePassword,
                                 })}
+                                placeholder="********"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
+                        {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
                         </label>
-                        {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
                         <br />
 
                         <button
                             type="submit"
-
                             className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
                         >
                             Sign Up

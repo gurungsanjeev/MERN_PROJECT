@@ -4,8 +4,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { useAuth } from '../../Context/AuthProvider';
 
 const Login = () => {
+
+  const {authUser, setAuthUser} = useAuth();
   const notify = () => {
     toast("Login successfully!");
 
@@ -38,7 +41,8 @@ const Login = () => {
           navigate('/home')
 
         }
-        localStorage.setItem("messanger", JSON.stringify(response.data))
+        localStorage.setItem("TOKEN", JSON.stringify(response.data))
+        setAuthUser(response.data)
       })
       .catch((err) => {
 
@@ -48,7 +52,7 @@ const Login = () => {
 
           // option 2
           if (err.response.status === 404) {
-           alert("Invalid data, please check it") 
+          toast.warning('Invalid Username or password')
 
           }
 
