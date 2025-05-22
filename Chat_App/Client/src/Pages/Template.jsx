@@ -3,7 +3,7 @@ import React from 'react'
 import Navbar from '../Components/NavBar/Navbar'
 import { Outlet } from 'react-router-dom'
 
-const Home = () => {
+const Template = () => {
   return (
     <>
     <Navbar/>
@@ -13,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Template
