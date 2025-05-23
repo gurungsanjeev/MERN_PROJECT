@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthProvider.jsx';
+
 
 const Signup = () => {
 const {authUser, setAuthUser} = useAuth();
@@ -138,7 +139,7 @@ const {authUser, setAuthUser} = useAuth();
                     </form>
 
                     <p className="text-center text-sm text-gray-600 mt-4">
-                        Already have an account? <a href="/login" className="text-blue-600 hover:underline">Log in</a>
+                        Already have an account? <Link to="/login" className="text-blue-600 hover:underline">login</Link>
                     </p>
                 </div>
             </div>

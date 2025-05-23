@@ -106,3 +106,15 @@ export const logout = async (req, res) => {
         res.status(404).json({ message: "Errror", err })
     }
 }
+
+
+
+
+ export const getUserProfile = async (res, req)=>{
+    try{
+        const allUser = await User.find()
+    }
+    catch(err){
+        console.log("error " +  err)
+    }
+}
