@@ -56,8 +56,8 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
         // checking if email and password are provided or not
-        if(!email || !password){
-            return res.status(400).json({message: "Email and password are required"})
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" })
         }
 
 
@@ -66,7 +66,7 @@ export const login = async (req, res) => {
         /// user is from data base
         const user = await UserModel.findOne({ email })
 
-         // If user not found, return early
+        // If user not found, return early
         if (!user) {
             return res.status(404).json({ message: "Invalid user or password" });
         }
@@ -110,11 +110,16 @@ export const logout = async (req, res) => {
 
 
 
- export const getUserProfile = async (res, req)=>{
-    try{
-        const allUser = await User.find()
+export const getUserProfile = async (req, res) => {
+    try {
+
+        const loggedInUser = req.user._id;
+
+        /// find the user fromt he UserModel which is defined and exported at User.model
+        const allUser = await UserModel.find({_id:{$ne: loggedInUser}}).select("-password");
+        res.status(201).json({ allUser })
     }
-    catch(err){
-        console.log("error " +  err)
+    catch (err) {
+        console.log("error in fetching all users in controllers " + err)
     }
 }

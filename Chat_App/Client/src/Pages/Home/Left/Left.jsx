@@ -1,9 +1,14 @@
 import React from 'react'
-import User from '../Right/User';
+import User from './User';
 import { IoSearch } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
+import userGetAllUsers from '../../../Context/userGetAllUsers';
 
 const Left = () => {
+
+
+  const [ allUsers, loading] = userGetAllUsers
+  console.log(allUsers);
   return (
     <>
       <div className='left w-[30%] border border-slate-950  bg-gray-950 text-white '>
