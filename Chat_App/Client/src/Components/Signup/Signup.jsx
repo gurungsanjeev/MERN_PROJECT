@@ -32,7 +32,8 @@ const {authUser, setAuthUser} = useAuth();
             confirmPassword: data.confirmPassword,
         };
 
-       await axios.post('http://localhost:5003/user/signup', userInfo)
+    //    await axios.post('http://localhost:5003/user/signup', userInfo)
+       await axios.post('/user/signup', userInfo)
         .then((response)=>{
             console.log(response.data)
             if(response.data){

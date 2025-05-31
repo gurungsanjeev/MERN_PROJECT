@@ -27,7 +27,7 @@ try {
     console.log("Error :", error)
 }
 
-app.use('/user', userRoute)
+app.use('/api/user', userRoute)
 
 app.listen(process.env.PORT, ()=>{
     

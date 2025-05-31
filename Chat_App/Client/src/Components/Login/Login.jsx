@@ -29,7 +29,8 @@ const Login = () => {
     console.log(userInfo);
 
     // Make an API request
-    axios.post("http://localhost:5003/user/login", userInfo)
+    // axios.post("http://localhost:5003/user/login", userInfo)
+    axios.post("/api/user/login", userInfo)
       .then((response) => {
         console.log(response.data);
         if (response.data) {

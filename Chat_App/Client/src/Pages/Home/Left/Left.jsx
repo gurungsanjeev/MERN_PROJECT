@@ -7,8 +7,10 @@ import userGetAllUsers from '../../../Context/userGetAllUsers';
 const Left = () => {
 
 
-  const [ allUsers, loading] = userGetAllUsers
+  const [allUsers, loading] = userGetAllUsers();
   console.log(allUsers);
+  console.log("type of allUsers:", typeof allUsers);
+  // console.log(typeof(allUsers))
   return (
     <>
       <div className='left w-[30%] border border-slate-950  bg-gray-950 text-white '>
@@ -22,17 +24,18 @@ const Left = () => {
         <div className='border border-slate-700'>
 
         </div>
-      
-
-          
-          
-
-            <User />
-          
-        </div>
+        {
+          allUsers.map((user, index)=>
+            (
+            <User key={index} user={user}/>
+          ))
+        }
 
 
-      
+      </div>
+
+
+
 
 
 

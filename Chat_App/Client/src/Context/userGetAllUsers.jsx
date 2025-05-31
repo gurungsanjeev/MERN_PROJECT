@@ -1,6 +1,7 @@
 import React from 'react'
 import Cookies from "js-cookie"
 import axios from "axios"
+import { useState, useEffect } from 'react'
 
 
 const userGetAllUsers = () => {
@@ -8,14 +9,14 @@ const userGetAllUsers = () => {
     //function
     const [allUsers, setAllUsers] = useState([]);
     /// variable
-    const [loading, setLoading] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getUser = async() => {
             setLoading(true);
             try {
                 const token = Cookies.get("jwt");
-              const response =  await axios.get("http://localhost:5003/user/getUserProfile",{
+              const response =  await axios.get("/api/user/getUserProfile",{
                     Credentials : "iclude",
                     headers:{
                         Authorization: `Bearer ${token}`,
@@ -30,7 +31,7 @@ const userGetAllUsers = () => {
         getUser()
     },
 
-        [])
+        []);
 
     return [allUsers, loading];
 }
