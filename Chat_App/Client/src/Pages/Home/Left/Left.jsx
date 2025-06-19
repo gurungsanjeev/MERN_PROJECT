@@ -2,15 +2,15 @@ import React from 'react'
 import User from './User';
 import { IoSearch } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
-import userGetAllUsers from '../../../Context/userGetAllUsers';
+import userGetAllUsers from '../../../Context/userGetAllUsers.jsx';
 
 const Left = () => {
 
 
   const [allUsers, loading] = userGetAllUsers();
-  console.log(allUsers);
+  console.log({allUsers});
   console.log("type of allUsers:", typeof allUsers);
-  // console.log(typeof(allUsers))
+  console.log(typeof(allUsers))
   return (
     <>
       <div className='left w-[30%] border border-slate-950  bg-gray-950 text-white '>
@@ -24,12 +24,11 @@ const Left = () => {
         <div className='border border-slate-700'>
 
         </div>
-        {
-          allUsers.map((user, index)=>
+        {/* {allUsers.map((user, index)=>
             (
             <User key={index} user={user}/>
           ))
-        }
+        } */}
 
 
       </div>

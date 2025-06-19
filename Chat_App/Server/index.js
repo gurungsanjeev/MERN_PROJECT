@@ -1,35 +1,21 @@
-import express from 'express'
-import cors from 'cors'
-// import Connect from './db/connection.js';
-// import AuthRouter from './Routes/auth.js'
-import mongoose from 'mongoose';
+import express from "express"
 import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser';
-import userRoute from './Routes/user.route.js'
-
-/// middlewares
+import mongoose from "mongoose";
 const app = express();
 dotenv.config();
-app.use(cors()); /// enable for all request
-app.use(express.json());
-app.use(cookieParser());
-
 
 const PORT = process.env.PORT || 5001;
-const URI = process.env.MONGODB_URI
+const URI = process.env.MONGODB_URI;
 
 
-
-try {
-    mongoose.connect(URI);
-    console.log("connected to database successfully")
-} catch (error) {
-    console.log("Error :", error)
+try{
+    mongoose.connect(URI)
+    (console.log("connected to the Mongodb"));
+}catch(err){
+console.log("failed to connect mongodb")
 }
 
-app.use('/api/user', userRoute)
 
-app.listen(process.env.PORT, ()=>{
-    
-    console.log(`"server is running! at port " ${PORT}"`)
+app.listen(PORT, ()=>{
+    console.log(`server is running at port ${PORT}`)
 })
