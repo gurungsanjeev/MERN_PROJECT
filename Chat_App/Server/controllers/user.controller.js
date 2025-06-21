@@ -1,5 +1,6 @@
 import User from "../models/user.models.js";
 import bcrypt from "bcryptjs"
+import createTokenAndSaveCookie from '../jwt/generateToken.js'
 
 export const signup = async (req, res) => {
     try {
@@ -34,12 +35,62 @@ export const signup = async (req, res) => {
             email,
             password: hashedPassword,
         });
+
+
         await newUser.save()
-            .then(() => {
-                res.status(201).json({ message: "user register successfully" })
-            })
+        if (newUser) {
+            createTokenAndSaveCookie(newUser._id, res);
+            res.status(201).json({ message: "user register successfully", newUser })
+
+        }
+
+
 
     } catch (error) {
         console.log("error in user Controller" + error)
     }
 }
+
+
+export const login = async (req, res) => {
+    let { email, password } = req.body;
+    try {
+        //converting the password into the string
+        password = String(password);
+
+        const user = await User.findOne({ email })
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!user || !isMatch) {
+            return res.status(400).json({ message: "invalid User or password" });
+        }
+        createTokenAndSaveCookie(user._id, res);
+        res.status(201).json({
+            message: " user logged in successfully",
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+            }
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json({ message: "server error" })
+
+    }
+};
+
+
+
+export const logout = async (req, res) => {
+    try {
+        res.clearCookie('jwt')
+        res.status(200).json({ message: "user logged out successfully" });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json({ message: "server error" })
+
+    }
+}
+
