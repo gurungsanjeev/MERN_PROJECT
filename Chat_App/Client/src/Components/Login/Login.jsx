@@ -6,20 +6,19 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useAuth } from '../../Context/AuthProvider';
 
+
+
 const Login = () => {
-
-  const {authUser, setAuthUser} = useAuth();
-  const notify = () => {
-    toast("Login successfully!");
-
-  }
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [authUser, setAuthUser] = useAuth();
   const navigate = useNavigate();
 
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
+
+
+
+  const onSubmit = async (data) => {
     const userInfo = {
 
       email: data.email,
@@ -29,37 +28,57 @@ const Login = () => {
     console.log(userInfo);
 
     // Make an API request
-    // axios.post("http://localhost:5003/user/login", userInfo)
-    axios.post("/api/user/login", userInfo)
-      .then((response) => {
+    async function loginData() {
+      const url = "/api/user/login"
+      try {
+        const response = await axios.post(url, userInfo)
         console.log(response.data);
         if (response.data) {
-          alert("Login successfully! You can now login")
-          setTimeout(() => {
-            notify();
-
-          }, 2000);
-          navigate('/home')
-
+          alert("login successfully");
+          // navigate('/home');
         }
-        localStorage.setItem("TOKEN", JSON.stringify(response.data))
+        localStorage.setItem("Messanger", JSON.stringify(response.data))
         setAuthUser(response.data)
-      })
-      .catch((err) => {
+        navigate('/home');
+      }
+      catch (error) {
 
-        if (err.response) {
-          // option 1
-          //  alert(err.response.data.message)
+        alert(error.response.data.message)
 
-          // option 2
-          if (err.response.status === 404) {
-          toast.warning('Invalid Username or password')
+      }
+    }
+    loginData();
+    // axios.post("http://localhost:5003/user/login", userInfo)
+    // axios.post("/api/user/login", userInfo)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (response.data) {
+    //       alert("Login successfully! You can now login")
+    //       setTimeout(() => {
+    //         notify();
 
-          }
+    //       }, 2000);
+    //       navigate('/home')
+
+    //     }
+    //     localStorage.setItem("TOKEN", JSON.stringify(response.data))
+    //     setAuthUser(response.data)
+    //   })
+    //   .catch((err) => {
+
+    //     if (err.response) {
+    //       // option 1
+    //       //  alert(err.response.data.message)
+
+    //       // option 2
+    //       if (err.response.status === 404) {
+    //         toast.warning('Invalid Username or password')
+
+    //       }
 
 
-        }
-      });
+    //     }
+    //   });
   };
 
   return (

@@ -1,40 +1,37 @@
 import React from 'react'
-import Cookies from "js-cookie"
-import axios from "axios"
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useState } from 'react';
 
+const userGetAllUsers = () => {
 
-function userGetAllUsers(){
-
-    //function
     const [allUsers, setAllUsers] = useState([]);
-    /// variable
-    const [loading, setLoading] = useState(true)
-
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        const getUser = async() => {
-            setLoading(true);
+        const getUsers = async () => {
+            setLoading(true)
             try {
+
                 const token = Cookies.get("jwt");
-                const response = await axios.get("/api/user/getUserProfile", {
-                    Credentials: "true",
+                const response = await axios.get('/api/user/getUserProfile', {
+                    withCredentials: true,
                     headers: {
                         Authorization: `Bearer ${token}`,
-                    }
+                    },
                 });
-                setAllUsers(response.data)
-                console.log("Response Data:", response.data || []);
-
+                setAllUsers(response.data.filteredUsers);
                 setLoading(false);
-            } catch (error) {
-                console.log("Error in userGetAllUsers" + error);
             }
-        };
-        getUser();
-    }, []);
 
-    console.log("value of allUsers" + allUsers)
+            catch (error) {
+                console.log("error in usegetAll Users:" + error)
+            }
+        }
+        getUsers();
+    }, [])
     return [allUsers, loading];
+
 }
 
 export default userGetAllUsers;

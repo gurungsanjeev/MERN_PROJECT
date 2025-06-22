@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeRight from './Right/Right'
 import HomeLeft from './Left/Left'
-import Logout from './Right/Logout'
+import Logout from './Left/Logout'
 
 const Home = () => {
   return (

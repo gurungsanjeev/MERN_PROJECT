@@ -6,6 +6,11 @@ export const signup = async (req, res) => {
     try {
         let { name, email, password, confirmpassword } = req.body;
 
+
+
+        ///Always remember to convert the password to string before the hashing 
+        /// hashing only support the string type
+
         /// converting the password into string
         password = String(password);
 
@@ -40,7 +45,13 @@ export const signup = async (req, res) => {
         await newUser.save()
         if (newUser) {
             createTokenAndSaveCookie(newUser._id, res);
-            res.status(201).json({ message: "user register successfully", newUser })
+            res.status(201).json({
+                message: "user register successfully", user: {
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                }
+            })
 
         }
 
@@ -91,6 +102,20 @@ export const logout = async (req, res) => {
         console.log(err);
         res.status(400).json({ message: "server error" })
 
+    }
+}
+
+
+
+
+export const getUserProfile = async (req, res) => {
+    try {
+        const loggedInUser = req.user._id;
+        const filteredUsers = await User.find({ _id: { $ne: loggedInUser } }).select("-password")
+        res.status(201).json({ filteredUsers })
+    } catch (error) {
+        console.log("Error in getUserProfile Controllers: " + error)
+        res.status(400).json({ message: "Server Error" })
     }
 }
 

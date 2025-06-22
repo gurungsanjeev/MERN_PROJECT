@@ -10,25 +10,28 @@ import Signup from './Components/Signup/Signup'
 import Home from './Pages/Home/Home'
 import { useAuth } from './Context/AuthProvider'
 
+
 function App() {
   // object destrcting so using curly braces {}
   /// array destructing use big bracket []
-  const {authUser, setAuthUser} = useAuth()
+
+
+  const [authUser, setAuthUser] = useAuth()
   console.log(authUser)
   return (
     <>
       <Routes>
         <Route path="/" element={<Template />}>
           <Route index element={<LandingPage />} />
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
+          <Route path='login' element={authUser ? <Navigate to={'/home'} /> : <Login />} />
+          <Route path='signup' element={authUser ? <Navigate to={'/'} /> : <Signup />} />
         </Route>
-          <Route path='home' element={authUser ? <Home /> : <Navigate to="/login" />} />
+        <Route path='home' element={authUser ? <Home /> : <Navigate to={'/login'} />} />
 
       </Routes>
 
 
-      
+
     </>
   )
 }

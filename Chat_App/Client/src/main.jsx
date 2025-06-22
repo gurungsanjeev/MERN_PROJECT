@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-
+import { AuthProvider } from './Context/AuthProvider.jsx'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter, createBrowserRouter } from 'react-router-dom'
@@ -13,7 +13,7 @@ import Home from './Pages/Home/Home.jsx'
 // import Signup from './Components/Signup/Singup.jsx'
 import Signup from './Components/Signup/Signup.jsx'
 
-import { AuthProvider } from './Context/AuthProvider.jsx'
+
 import Template from './Pages/Template.jsx'
 
 
@@ -42,10 +42,10 @@ import Template from './Pages/Template.jsx'
 
 
 
-    //   {
-    //     path: '/home',
-    //     // element:  authUser?<Home/>:<Login/>
-     
+//   {
+//     path: '/home',
+//     // element:  authUser?<Home/>:<Login/>
+
 //     // },
 //   ]
 //   },
@@ -57,12 +57,14 @@ import Template from './Pages/Template.jsx'
 // ])
 
 createRoot(document.getElementById('root')).render(
- <BrowserRouter>
- <AuthProvider>
+  <BrowserRouter>
 
-    {/* <RouterProvider router={router}/> */}
-    <App />
-  </AuthProvider>
- </BrowserRouter>
+    <AuthProvider>
+
+      {/* <RouterProvider router={router}/> */}
+      <App />
+
+    </AuthProvider>
+  </BrowserRouter>
 
 );
