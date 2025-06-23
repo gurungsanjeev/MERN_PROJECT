@@ -6,6 +6,7 @@ import { useAuth } from "../../Context/AuthProvider";
 
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [authUser, setAuthUser] = useAuth()
     const {
         register,
@@ -37,6 +38,7 @@ const Signup = () => {
                 console.log(response.data);
                 if (response.data) {
                     alert("Signup successfully");
+                    navigate('/login');
                 }
                 localStorage.setItem("Messanger", JSON.stringify(response.data))
                 setAuthUser(response.data)

@@ -1,0 +1,6 @@
+**** message model*****
+
+
+Sender Id
+receiver Id
+message

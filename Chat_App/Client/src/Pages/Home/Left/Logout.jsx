@@ -5,8 +5,10 @@ import { BiLogOut } from "react-icons/bi";
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
 
+
 const Logout = () => {
-    const navigate = useNavigate();
+
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const handleLogout = async () => {
         setLoading(true);
@@ -16,6 +18,8 @@ const Logout = () => {
             Cookies.remove('jwt');
             setLoading(false);
             alert("Logout Successfully")
+            navigate('/login')
+
 
         } catch (error) {
             console.log(error)

@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import userRoute from "./routes/user.route.js"
 import cors from "cors"
 import cookieParser from "cookie-parser";
+import messageRoute from "./routes/message.route.js"
+
 
 
 
@@ -31,6 +33,7 @@ try {
 
 /// creating the middelwares
 app.use("/api/user", userRoute)
+app.use("/api/message", messageRoute)
 
 
 

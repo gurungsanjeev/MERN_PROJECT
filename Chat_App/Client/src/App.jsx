@@ -23,10 +23,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Template />}>
           <Route index element={<LandingPage />} />
-          <Route path='login' element={authUser ? <Navigate to={'/home'} /> : <Login />} />
-          <Route path='signup' element={authUser ? <Navigate to={'/'} /> : <Signup />} />
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<Signup />} />
         </Route>
-        <Route path='home' element={authUser ? <Home /> : <Navigate to={'/login'} />} />
+        <Route path='/home' element={authUser ? <Home /> : <Navigate to={'/login'} />} />
 
       </Routes>
 
