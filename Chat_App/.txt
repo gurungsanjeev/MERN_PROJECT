@@ -1,6 +1,13 @@
-**** message model*****
+ 
 
 
-Sender Id
-receiver Id
-message
+ ************* Message Model ******
+ _id =
+  senderID=
+  receiverID= 
+  Message 
+
+
+
+
+  
