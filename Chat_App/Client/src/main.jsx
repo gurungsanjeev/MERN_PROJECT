@@ -9,7 +9,7 @@ import Login from './Components/Login/Login.jsx'
 import { useState } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home/Home.jsx'
-
+import { SocketProvider } from './Context/SocketContext.jsx'
 // import Signup from './Components/Signup/Singup.jsx'
 import Signup from './Components/Signup/Signup.jsx'
 
@@ -60,9 +60,10 @@ createRoot(document.getElementById('root')).render(
   <BrowserRouter>
 
     <AuthProvider>
-
-      {/* <RouterProvider router={router}/> */}
-      <App />
+      <SocketProvider>
+        {/* <RouterProvider router={router}/> */}
+        <App />
+      </SocketProvider>
 
     </AuthProvider>
   </BrowserRouter>

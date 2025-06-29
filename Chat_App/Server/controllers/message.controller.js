@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId } from "../SocketIO/server.js";
+// import { io } from "../SocketIO/server.js";
 
 export const sendMessage = async (req, res) => {
     try {
@@ -40,10 +42,17 @@ export const sendMessage = async (req, res) => {
         });
 
         //  Link message to conversation
-        conversation.message.push(newMessage._id);
+        if (newMessage) {
+
+            conversation.message.push(newMessage._id);
+        }
 
         //  Save both
         await Promise.all([conversation.save(), newMessage.save()]);
+        const receiversocketId = getReceiverSocketId(receiverId);
+        if (receiverObjectId) {
+            io.to(receiversocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json({ message: "Message sent successfully", newMessage });
 

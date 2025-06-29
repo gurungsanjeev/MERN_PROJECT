@@ -34,7 +34,7 @@ const Login = () => {
         const response = await axios.post(url, userInfo)
         console.log(response.data);
         if (response.data) {
-          alert("login successfully");
+          toast.success("login successfully");
           // navigate('/home');
         }
         localStorage.setItem("Messanger", JSON.stringify(response.data))
@@ -43,7 +43,7 @@ const Login = () => {
       }
       catch (error) {
 
-        alert(error.response.data.message)
+        toast.error(error.response.data.message)
 
       }
     }

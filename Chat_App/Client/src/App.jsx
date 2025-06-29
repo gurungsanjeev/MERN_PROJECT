@@ -9,6 +9,7 @@ import Login from './Components/Login/Login'
 import Signup from './Components/Signup/Signup'
 import Home from './Pages/Home/Home'
 import { useAuth } from './Context/AuthProvider'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <Route path='/home' element={authUser ? <Home /> : <Navigate to={'/login'} />} />
 
       </Routes>
-
+      <Toaster />
 
 
     </>

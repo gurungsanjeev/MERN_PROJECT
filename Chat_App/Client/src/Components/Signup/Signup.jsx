@@ -37,14 +37,14 @@ const Signup = () => {
                 const response = await axios.post(url, userInfo);
                 console.log(response.data);
                 if (response.data) {
-                    alert("Signup successfully");
+                    toast.success("Signup successfully");
                     navigate('/login');
                 }
                 localStorage.setItem("Messanger", JSON.stringify(response.data))
                 setAuthUser(response.data)
             }
             catch (err) {
-                alert("Error in posting data: " + err);
+                toast.error("Error in posting data: " + err);
                 console.log("error in posting data : " + err.message)
             }
 

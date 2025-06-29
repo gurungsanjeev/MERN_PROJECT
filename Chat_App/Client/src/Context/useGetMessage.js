@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const useGetMessage = () => {
     const [loading, setLoading] = useState(false)
-    const { messages, setMessages, selectedConversation } = useConversation();
+    const { message, setMessage, selectedConversation } = useConversation();
 
 
     useEffect(() => {
@@ -16,19 +16,22 @@ const useGetMessage = () => {
                     const response = await axios.get(
                         `/api/message/get/${selectedConversation._id}`
                     );
-                    setMessages(response.data);
+                    console.log("response", response);
+                    setMessage(response.data.message);
                     setLoading(false);
 
                 } catch (error) {
                     console.log("Error in useGetMessage: " + error);
+                } finally {
+                    setLoading(false);
                 }
             }
         }
         getMessage();
-    }, [selectedConversation, setMessages])
+    }, [selectedConversation, setMessage])
 
     return {
-        messages,
+        message,
         loading
 
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BiLogOut } from "react-icons/bi";
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const Logout = () => {
@@ -17,7 +18,7 @@ const Logout = () => {
             localStorage.removeItem("Messanger")
             Cookies.remove('jwt');
             setLoading(false);
-            alert("Logout Successfully")
+            toast.success("Logout Successfully")
             navigate('/login')
 
 
