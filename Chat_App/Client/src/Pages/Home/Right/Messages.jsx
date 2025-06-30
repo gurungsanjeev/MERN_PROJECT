@@ -46,7 +46,7 @@ import useGetSocketMessage from '../../../Context/useGetSocketMessage.jsx';
 
 const Messages = () => {
     const { message, loading } = useGetMessage();
-    useGetSocketMessage();
+    useGetSocketMessage(); /// this hook listens to incoming messages
     console.log(message);
 
 

@@ -4,8 +4,10 @@ import axios from 'axios';
 
 const useSendMessage = () => {
     const [loading, setLoading] = useState(false);
-    const { message, setMessage, selectedConversation } = useConversation()
+    const { message, setMessage, selectedConversation } = useConversation();
+
     const sendMessage = async (message) => {
+
         setLoading(true);
 
         try {
@@ -23,7 +25,8 @@ const useSendMessage = () => {
         }
 
     }
-    // sendMessage();
+
+
     return { loading, sendMessage }
 
 }

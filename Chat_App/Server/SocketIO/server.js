@@ -31,15 +31,15 @@ io.on("connection", (socket) => {
         socket.userId = userId; // Save userId on socket object for later reference
         console.log("Current users:", users);
     }
-
+    // used to send the events to all the connected users
     io.emit("getonline", Object.keys(users));
-
+    /// used to listen client side events emitted by server side
     socket.on("disconnect", () => {
         console.log("Client disconnected:", socket.id);
-        if (socket.userId) {
-            delete users[socket.userId];
-            io.emit("getOnline", Object.keys(users));
-        }
+        // if (socket.userId) {
+        delete users[userId];
+        io.emit("getOnline", Object.keys(users));
+        // }
     });
 });
 

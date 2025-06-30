@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useAuth } from './AuthProvider.jsx'
 import io from "socket.io-client"
 
-
+// it is a hook
 const socketContext = createContext();
 
 export const useSocketContext = () => {
