@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoIosSend } from "react-icons/io";
+
 import useSendMessage from '../../../Context/useSendMessage';
 import { useEffect } from 'react';
 
@@ -11,7 +12,7 @@ const TypeMessage = () => {
 
 
   const handleSubmit = async (e) => {
-
+    console.log(e.target.value);
     e.preventDefault();
     // if (!message.trim()) return;
 
@@ -47,3 +48,39 @@ const TypeMessage = () => {
 };
 
 export default TypeMessage;
+
+
+
+
+// import { useState } from 'react';
+// import useConversation from '../../../Statemanage/UseConversation';
+// import axios from 'axios';
+
+// const useSendMessage = () => {
+//   const [loading, setLoading] = useState(false);
+//   const { message, setMessages, selectedConversation } = useConversation(); // plural
+
+//   const sendMessage = async (text) => {
+//     if (!text.trim()) return;
+//     setLoading(true);
+
+//     try {
+//       const response = await axios.post(
+//         `/api/message/send/${selectedConversation._id}`,
+//         { message: text }
+//       );
+
+//       // Update conversation instantly
+//       setMessages((prev) => [...prev, response.data]);
+
+//     } catch (error) {
+//       console.log("Error in sendMessage:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return { loading, sendMessage };
+// };
+
+// export default useSendMessage;
