@@ -7,7 +7,7 @@ import Messages from './Messages'
 const Right = () => {
     return (
         <>
-            <div className='border-2 border-black w-[70%] max-w-[70%] bg-gray-700 text-white'>
+            <div className='border-2 border-black w-[70%] max-w-[70%] bg-slate-800 text-white'>
 
 
                 <ChatUser />
