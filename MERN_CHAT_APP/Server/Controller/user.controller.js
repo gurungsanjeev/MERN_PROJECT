@@ -7,7 +7,7 @@ export const signup = async (req, res) => {
     try {
 
 
-        let { name, email, password, confirmpassword } = req.body;
+        let { name, email, password, confirmPassword } = req.body;
 
         //// converting number into string
 
@@ -16,14 +16,14 @@ export const signup = async (req, res) => {
 
         /// converting confirm password into string
 
-        confirmpassword = String(confirmpassword);
+        confirmPassword = String(confirmPassword);
 
 
 
 
 
         // comparing password and confirmpassword
-        if (password !== confirmpassword) {
+        if (password !== confirmPassword) {
             return res.status(400).json({ message: "password doesnot match" });
         }
 
@@ -39,12 +39,19 @@ export const signup = async (req, res) => {
         const newUser = await new User({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            // confirmpassword: hashedPassword
         });
         await newUser.save()
         if (newUser) {
             createTokenAndSaveCookie(newUser._id, res);// _id is taken from the database 
-            res.status(201).json({ message: "User register successfully", newUser });
+            res.status(201).json({
+                message: "User register successfully", user: {
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email
+                }
+            });
         }
     } catch (error) {
         console.log("Error in user controller", error);
