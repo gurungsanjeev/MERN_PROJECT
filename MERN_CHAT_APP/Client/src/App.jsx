@@ -17,9 +17,9 @@ function App() {
 
         {/* <Left />
         <Right /> */}
-        {/* <Login /> */}
+        <Login />
 
-        <Signup />
+        {/* <Signup /> */}
       </div>
     </>
   )
