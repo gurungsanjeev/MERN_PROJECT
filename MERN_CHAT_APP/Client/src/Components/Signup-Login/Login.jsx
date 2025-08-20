@@ -1,8 +1,14 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { useAuth } from '../../Context/AuthProvider'
+import { NavLink } from 'react-router'
+import Signup from './Signup'
 
 const Login = () => {
+
+    const { authUser, setAuthUser } = useAuth();
+
     const {
         register,
         handleSubmit,
@@ -25,6 +31,7 @@ const Login = () => {
                     alert("Loggined Successfully")
                 }
                 localStorage.setItem("token", JSON.stringify(res.data))
+                setAuthUser(res.data);
             })
 
             .catch((error) => {
@@ -36,7 +43,7 @@ const Login = () => {
     }
     return (
         <div
-            className='w-full flex justify-around  items-center  '
+            className='w-full flex justify-around  items-center max-h-screen h-screen  '
             style={{ backgroundImage: "url(/images/login_background.jpg)", backgroundSize: "cover", backgroundPosition: "center", }}>
 
 
@@ -64,7 +71,7 @@ const Login = () => {
                     <button className='bg-green-500 p-2 rounded-xl text-xl text-white hover:bg-green-700 mt-4'>Login</button>
                 </form>
                 <div className='mt-6'>
-                    <p>Don't have an account? <u className='text-blue-400'>create a new one</u></p>
+                    <p>Don't have an account? <NavLink to='/signup'><u className='text-blue-400'>create a new one</u></NavLink></p>
                 </div>
             </div>
             <div className='relative bottom-28'>

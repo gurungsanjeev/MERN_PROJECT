@@ -2,13 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
+
 const Navbar = () => {
     return (
         <>
 
-            <nav className='bg-indigo-500 text-white flex justify-between px-14 h-16 items-center sticky top-0 z-50'>
+            <nav className='bg-gradient-to-l from-indigo-600 to-indigo-500 w-full text-white flex justify-between px-14 h-[10vh] items-center sticky top-0 z-100'>
                 <div >
-                    <h1 className='text-2xl font-semibold'>Smart Chat</h1>
+                    <h1 className='text-2xl font-semibold'>Talksy</h1>
+
                 </div>
                 <ul className='space-x-6'>
                     <Link to="/login"> <button className='bg-white px-6 py-1.5 rounded-xl text-indigo-500 font-semibold'>Login</button></Link>

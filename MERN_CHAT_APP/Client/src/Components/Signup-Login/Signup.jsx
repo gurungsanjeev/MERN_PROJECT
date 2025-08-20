@@ -1,9 +1,13 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { useAuth } from '../../Context/AuthProvider'
+import { NavLink } from 'react-router'
 
 
 const Signup = () => {
+
+    const { authUser, setAuthUser } = useAuth();
 
     const {
         register,
@@ -12,7 +16,7 @@ const Signup = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const userInfo = {
             name: data.name,
             email: data.email,
@@ -22,10 +26,11 @@ const Signup = () => {
         console.log(userInfo);
 
         //making the connection with the database using the axios
-        axios.post('http://localhost:5000/user/signup', userInfo)
+        await axios.post('http://localhost:5000/user/signup', userInfo)
             .then((res) => {
                 console.log(res.data)
                 localStorage.setItem("token", JSON.stringify(res.data))
+                setAuthUser(res.data);
             })
 
             .catch((err) => {
@@ -47,7 +52,7 @@ const Signup = () => {
 
 
 
-            <div className=' min-w-screen flex'>
+            <div className=' min-w-screen flex max-h-screen h-screen'>
                 <div
                     className="right w-full flex items-center justify-center bg-cover bg-center "
                     style={{ backgroundImage: "url('/images/signup_Background.jpg')" }}
@@ -144,7 +149,7 @@ const Signup = () => {
 
                         {/* Footer */}
                         <p className='text-center text-gray-500 mt-4'>
-                            Already have an account? <span className='text-blue-600 hover:underline cursor-pointer'>Login</span>
+                            Already have an account? <NavLink to='/login'><span className='text-blue-600 hover:underline cursor-pointer'>Login</span></NavLink>
                         </p>
                     </div>
 

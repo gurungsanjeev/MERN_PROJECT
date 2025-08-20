@@ -7,18 +7,24 @@ import Login from './Components/Signup-Login/login'
 
 import './App.css'
 import Signup from './Components/Signup-Login/Signup'
+import { useAuth } from './Context/AuthProvider'
+import Home from './Components/Home'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const { authUser, setAuthUser } = useAuth();
+  console.log("app authsuer:", authUser);
+
   return (
+
     <>
       <div className='flex max-h-screen h-screen'>
 
         {/* <Left />
         <Right /> */}
-        <Login />
-
+        {/* <Login /> */}
+        <Home />
         {/* <Signup /> */}
       </div>
     </>
