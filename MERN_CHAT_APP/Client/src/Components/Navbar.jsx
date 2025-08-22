@@ -13,8 +13,12 @@ const Navbar = () => {
 
                 </div>
                 <ul className='space-x-6'>
-                    <Link to="/login"> <button className='bg-white px-6 py-1.5 rounded-xl text-indigo-500 font-semibold'>Login</button></Link>
-                    <Link to="/signup"> <button className='border px-6 py-1.5 rounded-xl font-semibold'>Signup</button></Link>
+                    {/* <Link to="/login">  */}
+                    <button className='bg-white px-6 py-1.5 rounded-xl text-indigo-500 font-semibold'>Login</button>
+                    {/* </Link> */}
+                    {/* <Link to="/signup"> */}
+                    <button className='border px-6 py-1.5 rounded-xl font-semibold'>Signup</button>
+                    {/* </Link> */}
                 </ul>
             </nav>
 

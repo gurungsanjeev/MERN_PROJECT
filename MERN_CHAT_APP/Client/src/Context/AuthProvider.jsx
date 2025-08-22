@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
 
-export  const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
     const initialUserState = Cookies.get('jwt') || localStorage.getItem('token');
 
     const [authUser, setAuthUser] = useState(initialUserState ? JSON.parse(initialUserState) : undefined)

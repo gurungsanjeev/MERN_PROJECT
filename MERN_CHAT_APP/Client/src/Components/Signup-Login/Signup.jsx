@@ -149,7 +149,7 @@ const Signup = () => {
 
                         {/* Footer */}
                         <p className='text-center text-gray-500 mt-4'>
-                            Already have an account? <NavLink to='/login'><span className='text-blue-600 hover:underline cursor-pointer'>Login</span></NavLink>
+                            Already have an account? <span className='text-blue-600 hover:underline cursor-pointer'><NavLink to='/login'>Login</NavLink></span>
                         </p>
                     </div>
 

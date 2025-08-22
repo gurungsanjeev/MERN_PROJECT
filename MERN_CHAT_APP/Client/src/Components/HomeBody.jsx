@@ -18,9 +18,9 @@ const HomeBody = () => {
                     bg-amber-300 rounded-xl text-2xl 
                     hover:bg-amber-400 
                     border-2 border-amber-400
-                    shadow-2xl
+                    shadow-2xl 
                     ease-in-out duration-300
-                    transition-transform hover:scale-120  '><NavLink to='/login'> Let's Connect</NavLink></button>
+                    transition-transform hover:scale-120  '><NavLink to='/login'>Let's Connect</NavLink></button>
                 </div>
             </div>
         </>

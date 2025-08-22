@@ -3,11 +3,13 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useAuth } from '../../Context/AuthProvider'
 import { NavLink } from 'react-router'
+import { useNavigate } from 'react-router'
 import Signup from './Signup'
 
 const Login = () => {
 
     const { authUser, setAuthUser } = useAuth();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -32,6 +34,8 @@ const Login = () => {
                 }
                 localStorage.setItem("token", JSON.stringify(res.data))
                 setAuthUser(res.data);
+                navigate('/home')
+
             })
 
             .catch((error) => {
@@ -71,7 +75,7 @@ const Login = () => {
                     <button className='bg-green-500 p-2 rounded-xl text-xl text-white hover:bg-green-700 mt-4'>Login</button>
                 </form>
                 <div className='mt-6'>
-                    <p>Don't have an account? <NavLink to='/signup'><u className='text-blue-400'>create a new one</u></NavLink></p>
+                    <p>Don't have an account? <u className='text-blue-400 cursor-pointer'><NavLink to='/signup'>create a new one</NavLink></u></p>
                 </div>
             </div>
             <div className='relative bottom-28'>
