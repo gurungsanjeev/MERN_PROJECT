@@ -114,7 +114,7 @@ export const getUserProfile = async (req, res) => {
     try {
 
         const loggedInUser = req.User._id;
-        const filteredUsers = await User.find({ _id: { $ne: loggedInUser } }).select("-password");/// display the user list excluding loggedin Users
+        const filteredUsers = await User.find({ _id: { $ne: loggedInUser } }).select("-password");/// ne = not equal /// display the user list excluding loggedin Users
         res.status(201).json({ filteredUsers });
 
 

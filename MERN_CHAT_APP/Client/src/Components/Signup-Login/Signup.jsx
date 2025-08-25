@@ -26,7 +26,7 @@ const Signup = () => {
         console.log(userInfo);
 
         //making the connection with the database using the axios
-        await axios.post('http://localhost:5000/user/signup', userInfo)
+        await axios.post('/api/user/signup', userInfo)
             .then((res) => {
                 console.log(res.data)
                 localStorage.setItem("token", JSON.stringify(res.data))

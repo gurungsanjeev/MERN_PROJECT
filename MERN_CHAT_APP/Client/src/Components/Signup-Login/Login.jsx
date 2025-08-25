@@ -24,7 +24,7 @@ const Login = () => {
             password: data.password
         }
 
-        axios.post('http://localhost:5000/user/login', loginedUser)
+        axios.post('/api/user/login', loginedUser)
 
             .then((res) => {
                 console.log(res.data);
