@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import userRoute from "./routes/user.route.js"
+import messageRoute from './routes/message.route.js'
 import mongoose, { mongo } from 'mongoose';
 import cors from "cors"
 import cookieParser from 'cookie-parser';
@@ -29,6 +30,7 @@ catch (err) {
 
 // --- Routes ---
 app.use('/api/user', userRoute);
+app.use('/api/message', messageRoute);
 
 
 

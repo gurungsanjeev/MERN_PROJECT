@@ -30,6 +30,6 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
       {/* <RouterProvider router={router} /> */}
       <App />
-    </AuthProvider>,
+    </AuthProvider>
   </BrowserRouter>
 )
