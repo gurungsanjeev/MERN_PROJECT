@@ -5,8 +5,10 @@ import messageRoute from './routes/message.route.js'
 import mongoose, { mongo } from 'mongoose';
 import cors from "cors"
 import cookieParser from 'cookie-parser';
+import { app, server } from './Socket/server.js';
+
 dotenv.config();
-const app = express();
+
 
 app.use(express.json());
 
@@ -36,6 +38,6 @@ app.use('/api/message', messageRoute);
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)
 })
