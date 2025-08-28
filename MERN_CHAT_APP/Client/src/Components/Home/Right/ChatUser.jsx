@@ -1,6 +1,10 @@
 import React from 'react'
+import useConversation from '../../../Zustand/useConversation'
 
 const ChatUser = () => {
+
+    const { selectedConversation } = useConversation();
+    // console.log("selected: ", selectedConversation);  checking in console
     return (
         <>
 
@@ -11,7 +15,8 @@ const ChatUser = () => {
                     </div>
                 </div>
                 <div>
-                    <h1 className='text-m font-semibold'>Thomas William</h1>
+                    <h1 className='text-m font-semibold'>{selectedConversation.name}</h1>
+                    {/* <h1 className='text-m font-semibold'>ram</h1> */}
                     <p className='text-sm'>Online</p>
                 </div>
             </div>

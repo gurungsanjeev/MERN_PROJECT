@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import Left from './Components/Home/Left/Left'
 import Right from './Components/Home/Right/Right'
 // import Login from './Components/Signup-Login/login'
+// import Loading from './Components/Loading'
 
 import './App.css'
 import Signup from './Components/Signup-Login/Signup'
@@ -32,6 +33,7 @@ function App() {
         <Route path='/home' element={authUser ? (<LandingPage />) : <Login />} />
 
       </Routes>
+      {/* <Loading /> */}
 
 
     </>
