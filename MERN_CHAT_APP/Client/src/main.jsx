@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { AuthProvider } from './Context/AuthProvider.jsx'
 import './index.css'
 import App from './App.jsx'
+import { SocketProvider } from './Context/socketContext.jsx'
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'
 // import Login from './Components/Signup-Login/login.jsx'
 // import Signup from './Components/Signup-Login/Signup.jsx'
@@ -28,8 +29,13 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <AuthProvider>
+
       {/* <RouterProvider router={router} /> */}
-      <App />
+      <SocketProvider>
+
+        <App />
+      </SocketProvider>
+
     </AuthProvider>
   </BrowserRouter>
 )
