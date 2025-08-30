@@ -1,6 +1,14 @@
 import User from "../models/user.model.js";
 import createTokenAndSaveCookie from '../jwt/generateToken.js'
 import bcrypt from "bcryptjs"
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+
+app.use(cors());
+app.use(express.json());
 
 
 export const signup = async (req, res) => {

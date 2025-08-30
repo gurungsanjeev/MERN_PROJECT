@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useAuth } from '../../Context/AuthProvider'
 import { NavLink } from 'react-router'
+import { useNavigate } from 'react-router'
 
 
 const Signup = () => {
+    const navigate = useNavigate();
 
     const { authUser, setAuthUser } = useAuth();
 
@@ -29,13 +31,18 @@ const Signup = () => {
         await axios.post('/api/user/signup', userInfo)
             .then((res) => {
                 console.log(res.data)
+                if (res.data) {
+                    alert("Signup successfully");
+                    navigate('/login')
+                }
                 localStorage.setItem("token", JSON.stringify(res.data))
                 setAuthUser(res.data);
             })
 
             .catch((err) => {
-                if (err.response)
-                    alert("error" + err.response.data.error)
+                // if (err.response)
+                //     alert("error" + err.response.data.error)
+                alert("error in signup" + err);
             })
 
     }

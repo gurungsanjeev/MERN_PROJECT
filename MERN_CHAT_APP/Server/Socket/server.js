@@ -15,14 +15,36 @@ const io = new Server(server, {
     }
 })
 
+/// real time message code
+
+export const getReceiverSocketId = (receiverId) => {
+    return users[receiverId];
+}
+
+
+
+
+
+const users = {}
 
 //used to listen events onserver side
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
 
+    const userId = socket.handshake.query.userId;
+
+    if (userId) {
+        users[userId] = socket.id;
+        console.log(users);
+    }
+
+
+    io.emit("getonline", Object.keys(users));
     // used to listen client side events emitted by server side and Client side
     socket.on("disconnect", () => {
         console.log("a user disconnect", socket.id);
+        delete users[userId]
+        io.emit("getOnline", Object.keys(users));
 
     })
 })

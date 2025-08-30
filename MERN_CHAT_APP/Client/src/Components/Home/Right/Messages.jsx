@@ -3,9 +3,11 @@ import Message from './Message'
 import userGetMessage from '../../../Context/useGetMessage.js'
 import Loading from '../../Loading.jsx'
 import { useRef, useEffect } from 'react'
+import useGetSocketMessage from '../../../Context/useGetSocketMessage.js'
 
 const Messages = () => {
     const { loading, messages } = userGetMessage();
+    useGetSocketMessage(); /// listing incoming message
     console.log(messages);
 
 
@@ -13,7 +15,7 @@ const Messages = () => {
     useEffect(() => {
         setTimeout(() => {
             if (lastMsgRef.current) {
-                lastMsgRef.current.scrollIntoView({ behaviour: "smooth" });
+                lastMsgRef.current.scrollIntoView({ behavior: "smooth" });
 
             }
         }, 100);
@@ -27,9 +29,12 @@ const Messages = () => {
 
 
 
-                {loading ? (<Loading />) : (messages.length > 0 && messages.map((msg) => {
-                    return <Message key={msg._id} message={msg} />
-                }))}
+                {loading ? (<Loading />) : (messages.length > 0 && messages.map((msg) =>
+                    <div key={msg.id} ref={lastMsgRef}>
+                        <Message message={msg} />
+
+                    </div>
+                ))}
 
 
                 {!loading && messages.length === 0 && (

@@ -10,7 +10,7 @@ const Message = ({ message }) => {
 
 
     const chatName = itsMe ? "chat-end" : "chat-start";
-    const chatColor = itsMe ? "bg-blue-600" : '';
+    const chatColor = itsMe ? "bg-blue-600" : 'bg-slate-500';
     return (
         <>
             <div >
