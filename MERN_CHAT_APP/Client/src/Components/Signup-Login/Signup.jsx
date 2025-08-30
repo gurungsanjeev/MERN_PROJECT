@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useAuth } from '../../Context/AuthProvider'
 import { NavLink } from 'react-router'
 import { useNavigate } from 'react-router'
+import toast from 'react-hot-toast'
 
 
 const Signup = () => {
@@ -32,7 +33,7 @@ const Signup = () => {
             .then((res) => {
                 console.log(res.data)
                 if (res.data) {
-                    alert("Signup successfully");
+                    toast.success("Signup successfully");
                     navigate('/login')
                 }
                 localStorage.setItem("token", JSON.stringify(res.data))
@@ -42,7 +43,7 @@ const Signup = () => {
             .catch((err) => {
                 // if (err.response)
                 //     alert("error" + err.response.data.error)
-                alert("error in signup" + err);
+                toast.error("error in signup" + err);
             })
 
     }

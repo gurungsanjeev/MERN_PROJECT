@@ -13,6 +13,7 @@ import Home from './Components/Home'
 import { Route, Routes } from 'react-router'
 import { Navigate } from 'react-router'
 import Login from './Components/Signup-Login/Login'
+import toast, { Toaster } from 'react-hot-toast';
 import LandingPage from './Components/LandingPage'
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
       </Routes>
       {/* <Loading /> */}
 
-
+      <Toaster />
     </>
   )
 }

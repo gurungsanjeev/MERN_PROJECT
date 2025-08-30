@@ -3,6 +3,7 @@ import { TbLogout2 } from "react-icons/tb";
 import axios from 'axios';
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 
 const Logout = () => {
@@ -15,7 +16,7 @@ const Logout = () => {
             localStorage.removeItem('token');
             Cookies.remove('jwt');
             setLoading(false);
-            alert("Logout Successfully")
+            toast.success("Logout Successfully")
             navigate('/login')
 
         } catch (error) {
@@ -25,7 +26,7 @@ const Logout = () => {
     }
 
     return (
-        <div className='text-white w-[15%] max-w-[15%] bg-slate-800 '>
+        <div className='text-white w-[15%] max-w-[15%] bg-transparent '>
             <i> <h5 className='absolute bottom-14'>Logout</h5></i>
             <button> <TbLogout2 className='text-4xl absolute bottom-2 transition-transform  hover:scale-120 ease-in-out  '
                 onClick={handleLogout} /></button>

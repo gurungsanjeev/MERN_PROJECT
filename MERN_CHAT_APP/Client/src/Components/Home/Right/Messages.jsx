@@ -25,7 +25,7 @@ const Messages = () => {
     return (
         <>
 
-            <div style={{ minHeight: 'calc(90vh - 25vh)' }} className='px-4 overflow-auto ' >
+            <div style={{ minHeight: 'calc(90vh - 15vh)' }} className='px-4 overflow-auto ' >
 
 
 
@@ -39,7 +39,7 @@ const Messages = () => {
 
                 {!loading && messages.length === 0 && (
                     <div>
-                        <p className='mt-20 flex justify-center '>Say!👋 Hi to start the conversation</p>
+                        <p className='mt-20 flex justify-center text-xl '>Say!👋 Hi to start the conversation</p>
                     </div>
                 )
                 }

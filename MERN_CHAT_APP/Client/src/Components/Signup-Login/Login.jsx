@@ -5,6 +5,7 @@ import { useAuth } from '../../Context/AuthProvider'
 import { NavLink } from 'react-router'
 import { useNavigate } from 'react-router'
 import Signup from './Signup'
+import toast from 'react-hot-toast'
 
 const Login = () => {
 
@@ -30,7 +31,7 @@ const Login = () => {
                 console.log(res.data);
 
                 if (res.data) {
-                    alert("Loggined Successfully")
+                    toast.success("Loggined Successfully")
                 }
                 localStorage.setItem("token", JSON.stringify(res.data))
                 setAuthUser(res.data);
@@ -40,7 +41,7 @@ const Login = () => {
 
             .catch((error) => {
                 if (error.response) {
-                    alert("Error " + error.response.data.message);
+                    toast.error("Error " + error.response.data.message);
                 }
             })
 

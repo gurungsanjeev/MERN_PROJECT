@@ -28,7 +28,7 @@ const Type = () => {
                             onChange={(e) => setMessage(e.target.value)
                             }
                             placeholder='Text here' />
-                        <FiSend className='text-3xl transition-transform hover:scale-120' />
+                        <FiSend className='text-3xl transition-transform hover:scale-120' onClick={handleSubmit} />
                     </div>
                 </div>
             </form>
