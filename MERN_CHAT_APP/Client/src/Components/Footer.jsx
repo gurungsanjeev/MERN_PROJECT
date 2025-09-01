@@ -25,7 +25,7 @@ const Footer = () => {
 
                         </a>
                         <a>
-                            <IoPersonCircleSharp className='text-4xl' />
+                            <a href="https://gurungsanjeev.vercel.app/" target='_blank'><IoPersonCircleSharp className='text-4xl' /></a>
 
                         </a>
 
